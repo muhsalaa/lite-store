@@ -5,14 +5,13 @@
 
 	export let items: string[] = ['/images/no-pict.jpg'];
 
-	const LENGTH = 576;
 	let wrapper: HTMLDivElement;
 	let index = 0;
 
 	function next() {
 		if (index + 1 < items.length) {
 			wrapper.scrollTo({
-				left: LENGTH * (index + 1),
+				left: wrapper.clientWidth * (index + 1),
 				behavior: 'smooth'
 			});
 			index += 1;
@@ -22,7 +21,7 @@
 	function prev() {
 		if (index - 1 > -1) {
 			wrapper.scrollTo({
-				left: LENGTH * (index - 1),
+				left: wrapper.clientWidth * (index - 1),
 				behavior: 'smooth'
 			});
 			index -= 1;
@@ -34,20 +33,23 @@
 	{#if items.length > 1}
 		<ButtonIcon
 			class={clsx(
-				'absolute right-4 top-1/2 -translate-y-1/2 bg-gray-200/50 h-12 w-12',
+				'absolute right-4 top-1/2 -translate-y-1/2 bg-gray-200/50 h-12 w-12 hover:bg-gray-200/80',
 				index === items.length - 1 && 'hidden'
 			)}
 			on:click={next}><Icon src={ChevronRight} /></ButtonIcon
 		>
 		<ButtonIcon
 			class={clsx(
-				'absolute left-4 top-1/2 -translate-y-1/2 bg-gray-200/50 h-12 w-12',
+				'absolute left-4 top-1/2 -translate-y-1/2 bg-gray-200/50 h-12 w-12 hover:bg-gray-200/80',
 				index === 0 && 'hidden'
 			)}
 			on:click={prev}><Icon src={ChevronLeft} /></ButtonIcon
 		>
 	{/if}
-	<div class="snap-x flex snap-mandatory w-full overflow-x-auto no-scrollbar" bind:this={wrapper}>
+	<div
+		class="snap-x flex snap-mandatory w-full overflow-x-auto no-scrollbar pointer-events-none"
+		bind:this={wrapper}
+	>
 		{#each items as item, rowIndex (rowIndex)}
 			<img class="snap-start aspect-video" src={item} alt={`banner ${rowIndex}`} />
 		{/each}

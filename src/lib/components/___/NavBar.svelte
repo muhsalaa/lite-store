@@ -24,7 +24,7 @@
 	}
 </script>
 
-<header class="relative">
+<header class="sticky top-0 bg-white z-20 shadow-md">
 	<div class="w-full h-16 border-b px-3 flex items-center justify-between">
 		<a class="flex items-center gap-2" href="/">
 			<img
@@ -43,7 +43,7 @@
 	</div>
 	<nav
 		class={clsx(
-			'overflow-hidden absolute w-full',
+			'overflow-hidden absolute w-full z-10',
 			open ? 'max-h-40 transition-[max-height] duration-300' : 'max-h-0'
 		)}
 		use:clickOutside={() => {
