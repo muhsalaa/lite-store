@@ -14,7 +14,7 @@
 </script>
 
 <div id="container" class="w-full h-svh overflow-y-auto bg-gray-50">
-	<div class="max-w-lg min-w-96 mx-auto w-full bg-white shadow-sm min-h-full">
+	<div class="max-w-lg min-w-[375px] mx-auto w-full bg-white min-h-full flex flex-col">
 		<NavBar />
 		<slot />
 	</div>

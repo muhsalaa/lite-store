@@ -13,8 +13,7 @@
 	const paths = [
 		{ path: '/', name: 'Beranda' },
 		{ path: '/about', name: 'Tentang Kami' },
-		{ path: '/testimony', name: 'Testimoni' },
-		{ path: '/term-of-service', name: 'Ketentuan Pelayanan' }
+		{ path: '/testimony', name: 'Testimoni' }
 	];
 
 	function toggleNav(e: Event) {
@@ -32,7 +31,7 @@
 				alt="logo"
 				class="w-10 h-10"
 			/>
-			<p class="font-bold text-xl">Emot's Store</p>
+			<p class="font-bold text-xl">BrainBoost Store</p>
 		</a>
 		<div class="flex items-center gap-2">
 			<Cart />
