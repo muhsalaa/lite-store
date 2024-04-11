@@ -3,6 +3,7 @@
 	import '../app.css';
 
 	import { afterNavigate } from '$app/navigation';
+	import Footer from '$lib/components/___/Footer.svelte';
 
 	afterNavigate(() => {
 		document.getElementById('container')?.scrollTo({
@@ -17,5 +18,6 @@
 	<div class="max-w-lg min-w-[375px] mx-auto w-full bg-white min-h-full flex flex-col">
 		<NavBar />
 		<slot />
+		<Footer />
 	</div>
 </div>

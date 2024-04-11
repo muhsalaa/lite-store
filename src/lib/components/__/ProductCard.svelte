@@ -15,9 +15,12 @@
 	export let data: ProductProps;
 </script>
 
-<a class="shadow-md border rounded-lg overflow-hidden text-left flex flex-col" href="/">
+<a
+	class="shadow-md border rounded-lg overflow-hidden text-left flex flex-col min-w-40"
+	href="/item/{data.id}"
+>
 	<div>
-		<img src={data.thumbnail} alt="product name" class="aspect-square object-cover bg-center" />
+		<img src={data.thumbnail} alt="product name" class="w-full bg-center aspect-square" />
 	</div>
 	<div class="h-2 rounded-br-full bg-cyan-500 w-full"></div>
 	<div class="p-2">

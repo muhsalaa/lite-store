@@ -4,6 +4,7 @@
 	import { Icon, ChevronRight, ChevronLeft } from 'svelte-hero-icons';
 
 	export let items: string[] = ['/images/no-pict.jpg'];
+	export let type: 'image' | 'video' = 'video';
 
 	let wrapper: HTMLDivElement;
 	let index = 0;
@@ -29,7 +30,7 @@
 	}
 </script>
 
-<div class="relative">
+<div class="relative w-full">
 	{#if items.length > 1}
 		<ButtonIcon
 			class={clsx(
@@ -47,11 +48,15 @@
 		>
 	{/if}
 	<div
-		class="snap-x flex snap-mandatory w-full overflow-x-auto no-scrollbar pointer-events-none"
+		class="flex w-full overflow-x-auto overflow-y-hidden no-scrollbar pointer-events-none"
 		bind:this={wrapper}
 	>
 		{#each items as item, rowIndex (rowIndex)}
-			<img class="snap-start aspect-video" src={item} alt={`banner ${rowIndex}`} />
+			<img
+				class={type === 'video' ? 'aspect-video' : 'aspect-square object-cover min-w-full'}
+				src={item}
+				alt={`banner ${rowIndex}`}
+			/>
 		{/each}
 	</div>
 	{#if items.length > 1}

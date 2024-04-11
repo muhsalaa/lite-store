@@ -1,6 +1,6 @@
 <script lang="ts">
 	import clsx from 'clsx';
-	import { Icon, Bars3 } from 'svelte-hero-icons';
+	import { Icon, Bars3, ArrowLeft } from 'svelte-hero-icons';
 
 	import { page } from '$app/stores';
 	import ButtonIcon from '$lib/components/_/ButtonIcon.svelte';
@@ -11,9 +11,9 @@
 	$: pathname = $page.url.pathname;
 
 	const paths = [
-		{ path: '/', name: 'Beranda' },
-		{ path: '/about', name: 'Tentang Kami' },
-		{ path: '/testimony', name: 'Testimoni' }
+		{ path: '/', name: 'Beranda', logo: true },
+		{ path: '/about', name: 'Tentang Kami', logo: true },
+		{ path: '/testimony', name: 'Testimoni', logo: true }
 	];
 
 	function toggleNav(e: Event) {
@@ -21,18 +21,28 @@
 		e.stopPropagation();
 		open = !open;
 	}
+
+	function back() {
+		history.back();
+	}
 </script>
 
 <header class="sticky top-0 bg-white z-20 shadow-md">
 	<div class="w-full h-16 border-b px-3 flex items-center justify-between">
-		<a class="flex items-center gap-2" href="/">
-			<img
-				src="https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/4dbe2e83261589.5d371e45eed23.png"
-				alt="logo"
-				class="w-10 h-10"
-			/>
-			<p class="font-bold text-xl">BrainBoost Store</p>
-		</a>
+		{#if paths.find((path) => path.path === pathname)}
+			<a class="flex items-center gap-2" href="/">
+				<img
+					src="https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/4dbe2e83261589.5d371e45eed23.png"
+					alt="logo"
+					class="w-10 h-10"
+				/>
+				<p class="font-bold text-xl">BrainBoost Store</p>
+			</a>
+		{:else}
+			<button on:click={back} class="w-6 h-6">
+				<Icon src={ArrowLeft} />
+			</button>
+		{/if}
 		<div class="flex items-center gap-2">
 			<Cart />
 			<ButtonIcon on:click={toggleNav} class="w-10 h-10">
