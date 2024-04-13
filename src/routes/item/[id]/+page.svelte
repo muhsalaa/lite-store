@@ -1,12 +1,14 @@
-<script>
+<script lang="ts">
 	import Button from '$lib/components/_/Button.svelte';
 	import ButtonIcon from '$lib/components/_/ButtonIcon.svelte';
 	import SocialIcons from '$lib/components/_/SocialIcons.svelte';
 	import Carousel from '$lib/components/__/Carousel.svelte';
 	import ProductCard from '$lib/components/__/ProductCard.svelte';
+	import { addProductToCart } from '$lib/store/cart';
 	import { formatCurrency } from '$lib/utils/formatting';
 	import { getDiscount } from '$lib/utils/math';
 	import { ChatBubbleLeftEllipsis, Icon } from 'svelte-hero-icons';
+	import type { ProductProps } from '$lib/types/product';
 
 	export let data;
 </script>
@@ -65,7 +67,7 @@
 				<Icon src={ChatBubbleLeftEllipsis} />
 			</ButtonIcon>
 			<Button outline block>Beli Sekarang</Button>
-			<Button block>+ Keranjang</Button>
+			<Button block on:click={() => addProductToCart(data.product)}>+ Keranjang</Button>
 		</div>
 	</section>
 </div>

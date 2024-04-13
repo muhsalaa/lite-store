@@ -1,16 +1,7 @@
 <script lang="ts">
+	import type { ProductProps } from '$lib/types/product';
 	import { formatCurrency } from '$lib/utils/formatting';
 	import { getDiscount } from '$lib/utils/math';
-
-	type ProductProps = {
-		discount: number;
-		id: number;
-		title: string;
-		description: string;
-		price: number;
-		thumbnail: string;
-		stock: number;
-	};
 
 	export let data: ProductProps;
 </script>

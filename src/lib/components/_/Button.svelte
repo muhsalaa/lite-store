@@ -9,7 +9,7 @@
 	on:click
 	{...$$restProps}
 	class={clsx(
-		'flex px-2 py-1 items-center justify-center rounded-lg hover:bg-gray-100 ',
+		'flex px-2 py-1 items-center justify-center rounded-lg ',
 		'font-bold',
 		outline
 			? 'border border-cyan-600 text-cyan-600 hover:bg-cyan-600 hover:text-white'

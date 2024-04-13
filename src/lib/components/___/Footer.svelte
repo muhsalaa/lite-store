@@ -4,15 +4,15 @@
 
 <footer class="mt-auto">
 	<div class="flex p-4 bg-cyan-50">
-		<div class="w-2/3">
-			<div class="flex items-center gap-2 mb-2">
+		<div class="w-2/3 sm:w-3/4">
+			<a class="flex items-center gap-2 mb-2" href="/">
 				<img
 					src="https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/4dbe2e83261589.5d371e45eed23.png"
 					alt="logo"
 					class="w-8 h-8 rounded-full"
 				/>
 				<p class="font-bold text-sm">BrainBoost Store</p>
-			</div>
+			</a>
 			<p class="max-w-48 text-[10px] text-gray-700 mb-3">
 				One stop shopping untuk berbagai suplemen otak alami.
 			</p>

@@ -1,9 +1,12 @@
 <script>
-	import NavBar from '$lib/components/___/NavBar.svelte';
-	import '../app.css';
-
+	import { onMount } from 'svelte';
 	import { afterNavigate } from '$app/navigation';
+	import { loadInitialCart } from '$lib/store/cart';
+
+	import NavBar from '$lib/components/___/NavBar.svelte';
 	import Footer from '$lib/components/___/Footer.svelte';
+
+	import '../app.css';
 
 	afterNavigate(() => {
 		document.getElementById('container')?.scrollTo({
@@ -11,6 +14,10 @@
 			left: 0,
 			behavior: 'smooth'
 		});
+	});
+
+	onMount(() => {
+		loadInitialCart();
 	});
 </script>
 

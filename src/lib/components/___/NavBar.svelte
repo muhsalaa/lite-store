@@ -44,7 +44,9 @@
 			</button>
 		{/if}
 		<div class="flex items-center gap-2">
-			<Cart />
+			<a href="/cart">
+				<Cart />
+			</a>
 			<ButtonIcon on:click={toggleNav} class="w-10 h-10">
 				<Icon src={Bars3} />
 			</ButtonIcon>
