@@ -3,6 +3,7 @@
 	import { afterNavigate } from '$app/navigation';
 	import { loadInitialCart } from '$lib/store/cart';
 
+	import Toast from '$lib/components/__/Toast.svelte';
 	import NavBar from '$lib/components/___/NavBar.svelte';
 	import Footer from '$lib/components/___/Footer.svelte';
 
@@ -27,4 +28,5 @@
 		<slot />
 		<Footer />
 	</div>
+	<Toast />
 </div>

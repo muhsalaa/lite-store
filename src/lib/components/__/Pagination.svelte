@@ -11,7 +11,7 @@
 
 <div class="flex gap-2 items-center justify-center py-6">
 	<a
-		class={currentPage === 1 ? 'pointer-events-none text-gray-300' : ''}
+		class={currentPage === 1 ? 'pointer-events-none text-gray-400' : ''}
 		href={currentPage > 1 ? `/?page=${currentPage - 1}` : '/'}
 	>
 		<ButtonIcon class="h-8 w-8 bg-"><Icon src={ChevronLeft} /></ButtonIcon>

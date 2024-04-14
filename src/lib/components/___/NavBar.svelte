@@ -1,8 +1,9 @@
 <script lang="ts">
 	import clsx from 'clsx';
 	import { Icon, Bars3, ArrowLeft } from 'svelte-hero-icons';
-
+	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
+
 	import ButtonIcon from '$lib/components/_/ButtonIcon.svelte';
 	import Cart from '$lib/components/__/Cart.svelte';
 	import { clickOutside } from '$lib/utils/clickOutside';
@@ -22,9 +23,22 @@
 		open = !open;
 	}
 
-	function back() {
-		history.back();
-	}
+	const back = () => {
+		// save previous page url
+		const prevPage = window.location.href;
+
+		// go back one page
+		window.history.go(-1);
+
+		setTimeout(function () {
+			// if the page url doesnt change in 400ms
+			// means there is no history to go back and the url is same
+			// then close the webview
+			if (window.location.href == prevPage) {
+				goto('/');
+			}
+		}, 400);
+	};
 </script>
 
 <header class="sticky top-0 bg-white z-20 shadow-md">
@@ -39,8 +53,13 @@
 				<p class="font-bold text-xl">BrainBoost Store</p>
 			</a>
 		{:else}
-			<button on:click={back} class="w-6 h-6">
-				<Icon src={ArrowLeft} />
+			<button on:click={back} class="flex items-center gap-2">
+				<span class="w-6 h-6">
+					<Icon src={ArrowLeft} />
+				</span>
+				{#if pathname === '/cart'}
+					<span class="font-semibold mb-0.5">Keranjang</span>
+				{/if}
 			</button>
 		{/if}
 		<div class="flex items-center gap-2">

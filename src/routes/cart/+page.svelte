@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
+	import Button from '$lib/components/_/Button.svelte';
 	import ButtonIcon from '$lib/components/_/ButtonIcon.svelte';
 	import Checkbox from '$lib/components/_/Checkbox.svelte';
 	import { cart, decreaseProductQuantity, increaseProductQuantity } from '$lib/store/cart';
@@ -7,24 +9,29 @@
 	import { Icon, Minus, Plus, Trash } from 'svelte-hero-icons';
 
 	let checked: number[] = [];
+	$: totalAmount = $cart.reduce((acc, cart) => {
+		if (checked.includes(cart.id)) {
+			return acc + cart.quantity! * getDiscount(cart.price, cart.discount);
+		}
+
+		return acc + 0;
+	}, 0);
+
+	function decreaseProduct(id: number) {
+		decreaseProductQuantity(id);
+		// remove checked data when product deleted
+		$cart.find((cart) => cart.id === id) ? null : (checked = checked.filter((i) => i !== id));
+	}
+
+	function checkoutProduct() {
+		goto('/checkout');
+	}
 </script>
 
-<div class="h-full">
+{#if $cart.length}
 	<ul>
-		<li class="w-full bg-white px-4 py-3 border-b">
-			<Checkbox
-				checked={checked.length === $cart.length}
-				on:change={() => {
-					if (checked.length === $cart.length) {
-						checked = [];
-					} else {
-						checked = $cart.map(({ id }) => id);
-					}
-				}}
-			/>
-		</li>
 		{#each $cart as cart}
-			<li class="w-full bg-white px-4 py-3 border-b flex gap-3">
+			<li class="w-full bg-white px-4 py-3 border-b flex gap-3 last:border-b-0">
 				<Checkbox
 					checked={checked.includes(cart.id)}
 					on:change={() => {
@@ -49,14 +56,14 @@
 					<div class="flex items-center justify-between">
 						<div>
 							<p class="font-bold text-sm">
-								{formatCurrency(getDiscount(cart.price, 10))}
+								{formatCurrency(getDiscount(cart.price, cart.discount))}
 							</p>
 							<span class="text-gray-400 line-through text-xs">{formatCurrency(cart.price)}</span>
 						</div>
 						<div class="flex items-center gap-3">
 							<ButtonIcon
 								class="sm:w-8 sm:h-8 h-6 w-6"
-								on:click={() => decreaseProductQuantity(cart.id)}
+								on:click={() => decreaseProduct(cart.id)}
 								outline
 							>
 								{#if cart.quantity && cart.quantity > 1}
@@ -79,4 +86,33 @@
 			</li>
 		{/each}
 	</ul>
-</div>
+
+	<div class="w-full bg-white px-4 py-2 sticky bottom-0 border-t flex justify-between items-center">
+		<label class="flex items-center gap-2 cursor-pointer" for="checkbox-all">
+			<Checkbox
+				checked={checked.length === $cart.length}
+				on:change={() => {
+					if (checked.length === $cart.length) {
+						checked = [];
+					} else {
+						checked = $cart.map(({ id }) => id);
+					}
+				}}
+				id="checkbox-all"
+			/> <span class="text-sm font-semibold">Semua</span>
+		</label>
+		<div class="flex gap-2 items-center">
+			{#if totalAmount > 0}
+				<div class="text-right">
+					<h2 class="text-gray-400 text-xs font-medium">Total</h2>
+					<p class="font-bold text-sm">{formatCurrency(totalAmount)}</p>
+				</div>
+			{/if}
+			<Button on:click={checkoutProduct} disabled={checked.length === 0}>Beli</Button>
+		</div>
+	</div>
+{:else}
+	<div class="flex items-center justify-center px-3 mt-10 font-bold text-lg">
+		Keranjangmu masih kosong nih .. 😁
+	</div>
+{/if}

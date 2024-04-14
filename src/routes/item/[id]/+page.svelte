@@ -9,6 +9,12 @@
 	import { getDiscount } from '$lib/utils/math';
 	import { ChatBubbleLeftEllipsis, Icon } from 'svelte-hero-icons';
 	import type { ProductProps } from '$lib/types/product';
+	import { showToast } from '$lib/store/toast.js';
+
+	function addProduct(product: ProductProps) {
+		addProductToCart(product);
+		showToast({ content: 'Produk ditambahkan ke keranjang' });
+	}
 
 	export let data;
 </script>
@@ -67,7 +73,7 @@
 				<Icon src={ChatBubbleLeftEllipsis} />
 			</ButtonIcon>
 			<Button outline block>Beli Sekarang</Button>
-			<Button block on:click={() => addProductToCart(data.product)}>+ Keranjang</Button>
+			<Button block on:click={() => addProduct(data.product)}>+ Keranjang</Button>
 		</div>
 	</section>
 </div>
