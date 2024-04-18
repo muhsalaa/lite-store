@@ -30,7 +30,7 @@
 	}
 </script>
 
-<div class="relative w-full">
+<div class={clsx('relative w-full h-auto bg-gray-200', $$restProps.class)}>
 	{#if items.length > 1}
 		<ButtonIcon
 			class={clsx(
@@ -53,7 +53,9 @@
 	>
 		{#each items as item, rowIndex (rowIndex)}
 			<img
-				class={type === 'video' ? 'aspect-video' : 'aspect-square object-cover min-w-full'}
+				class={type === 'video'
+					? 'aspect-video min-w-full'
+					: 'aspect-square object-cover min-w-full'}
 				src={item}
 				alt={`banner ${rowIndex}`}
 			/>

@@ -13,7 +13,8 @@ export async function load({ fetch, url }) {
 			...data,
 			title: data.title + 'plus percobaan buat long data',
 			price: data.price * 40000,
-			discount: data.discountPercentage
+			discount: data.discountPercentage,
+			type: data.id % 2 === 0 ? 'marketplace' : 'own_store'
 		})),
 		currentPage: +currentPage
 	};

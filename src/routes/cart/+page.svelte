@@ -4,6 +4,7 @@
 	import ButtonIcon from '$lib/components/_/ButtonIcon.svelte';
 	import Checkbox from '$lib/components/_/Checkbox.svelte';
 	import { cart, decreaseProductQuantity, increaseProductQuantity } from '$lib/store/cart';
+	import { checkoutProduct } from '$lib/store/checkout';
 	import { formatCurrency } from '$lib/utils/formatting';
 	import { getDiscount } from '$lib/utils/math';
 	import { Icon, Minus, Plus, Trash } from 'svelte-hero-icons';
@@ -23,7 +24,8 @@
 		$cart.find((cart) => cart.id === id) ? null : (checked = checked.filter((i) => i !== id));
 	}
 
-	function checkoutProduct() {
+	function checkoutChosenProduct() {
+		checkoutProduct($cart.filter((cart) => checked.includes(cart.id)));
 		goto('/checkout');
 	}
 </script>
@@ -87,7 +89,7 @@
 		{/each}
 	</ul>
 
-	<div class="w-full bg-white px-4 py-2 sticky bottom-0 border-t flex justify-between items-center">
+	<div class="w-full bg-white px-4 py-2 sticky bottom-0 border-y flex justify-between items-center">
 		<label class="flex items-center gap-2 cursor-pointer" for="checkbox-all">
 			<Checkbox
 				checked={checked.length === $cart.length}
@@ -108,7 +110,7 @@
 					<p class="font-bold text-sm">{formatCurrency(totalAmount)}</p>
 				</div>
 			{/if}
-			<Button on:click={checkoutProduct} disabled={checked.length === 0}>Beli</Button>
+			<Button on:click={checkoutChosenProduct} disabled={checked.length === 0}>Beli</Button>
 		</div>
 	</div>
 {:else}

@@ -10,6 +10,7 @@ export async function load({ fetch, params }) {
 			title: data.title + 'plus percobaan buat long data',
 			price: data.price * 40000,
 			discount: data.discountPercentage,
+			type: data.id % 2 === 0 ? 'marketplace' : 'own_store',
 			marketplaces: [
 				{
 					id: 1,

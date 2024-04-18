@@ -4,19 +4,34 @@
 	import SocialIcons from '$lib/components/_/SocialIcons.svelte';
 	import Carousel from '$lib/components/__/Carousel.svelte';
 	import ProductCard from '$lib/components/__/ProductCard.svelte';
-	import { addProductToCart } from '$lib/store/cart';
+	import { addProductToCart, cart, increaseProductQuantity } from '$lib/store/cart';
 	import { formatCurrency } from '$lib/utils/formatting';
 	import { getDiscount } from '$lib/utils/math';
 	import { ChatBubbleLeftEllipsis, Icon } from 'svelte-hero-icons';
 	import type { ProductProps } from '$lib/types/product';
 	import { showToast } from '$lib/store/toast.js';
+	import { goto } from '$app/navigation';
+	import { checkoutProduct } from '$lib/store/checkout.js';
+
+	export let data;
+	const isOwnStore = data.product.type !== 'own_store';
 
 	function addProduct(product: ProductProps) {
 		addProductToCart(product);
 		showToast({ content: 'Produk ditambahkan ke keranjang' });
 	}
 
-	export let data;
+	function checkout(product: ProductProps) {
+		const item = $cart.find((item) => item.id === product.id);
+		if (item) {
+			increaseProductQuantity(item.id);
+			checkoutProduct([item]);
+		} else {
+			checkoutProduct([product]);
+		}
+
+		goto('/checkout');
+	}
 </script>
 
 <div class="bg-gray-100">
@@ -57,7 +72,12 @@
 	</section>
 
 	<section class="mt-3 bg-white px-4 py-3">
-		<h2 class="font-bold mb-3">Beli Produk dari Marketplace</h2>
+		<div class="mb-3">
+			<h2 class="font-bold">Beli Produk dari Marketplace</h2>
+			{#if !isOwnStore}
+				<p class="text-xs italic text-gray-400">(hanya dapat dibeli di marketplace tertera)</p>
+			{/if}
+		</div>
 		<div class="flex flex-wrap gap-4 w-full">
 			{#each data.product.marketplaces as marketplace}
 				<a href={marketplace.link}>
@@ -67,13 +87,15 @@
 		</div>
 	</section>
 
-	<section class="mt-3 sticky bottom-0 bg-white px-4 py-3 border-t">
-		<div class="flex gap-2 w-full">
-			<ButtonIcon class="h-10 w-10" outline>
-				<Icon src={ChatBubbleLeftEllipsis} />
-			</ButtonIcon>
-			<Button outline block>Beli Sekarang</Button>
-			<Button block on:click={() => addProduct(data.product)}>+ Keranjang</Button>
-		</div>
-	</section>
+	{#if isOwnStore}
+		<section class="mt-3 sticky bottom-0 bg-white px-4 py-3 border-t">
+			<div class="flex gap-2 w-full">
+				<ButtonIcon class="h-10 w-10" outline>
+					<Icon src={ChatBubbleLeftEllipsis} />
+				</ButtonIcon>
+				<Button outline block on:click={() => checkout(data.product)}>Beli Sekarang</Button>
+				<Button block on:click={() => addProduct(data.product)}>+ Keranjang</Button>
+			</div>
+		</section>
+	{/if}
 </div>
