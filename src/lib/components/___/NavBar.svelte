@@ -58,7 +58,9 @@
 					<Icon src={ArrowLeft} />
 				</span>
 				{#if pathname === '/cart'}
-					<span class="font-semibold mb-0.5">Keranjang</span>
+					<span class="font-semibold text-lg mb-0.5">Keranjang</span>
+				{:else if pathname === '/checkout'}
+					<span class="font-semibold text-lg mb-0.5">Pemesanan</span>
 				{/if}
 			</button>
 		{/if}

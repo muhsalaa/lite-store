@@ -6,4 +6,5 @@ export type ProductProps = {
 	price: number;
 	thumbnail: string;
 	stock: number;
+	weight: number;
 };

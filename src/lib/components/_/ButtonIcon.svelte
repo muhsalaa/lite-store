@@ -2,9 +2,12 @@
 	import clsx from 'clsx';
 
 	export let outline: boolean = false;
+	export let as: string = 'button';
 </script>
 
-<button
+<!-- svelte-ignore a11y-no-static-element-interactions -->
+<svelte:element
+	this={as}
 	on:click
 	{...$$restProps}
 	class={clsx(
@@ -14,4 +17,4 @@
 	)}
 >
 	<slot />
-</button>
+</svelte:element>

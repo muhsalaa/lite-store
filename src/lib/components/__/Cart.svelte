@@ -5,8 +5,8 @@
 	import ButtonIcon from '$lib/components/_/ButtonIcon.svelte';
 </script>
 
-<div class="relative">
-	<ButtonIcon class="w-10 h-10">
+<span class="relative">
+	<ButtonIcon class="w-10 h-10" as="span">
 		<Icon src={ShoppingCart} outline />
 	</ButtonIcon>
 	{#if $cart.length !== 0}
@@ -15,4 +15,4 @@
 			>{$cart.length}</span
 		>
 	{/if}
-</div>
+</span>

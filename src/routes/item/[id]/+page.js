@@ -11,6 +11,7 @@ export async function load({ fetch, params }) {
 			price: data.price * 40000,
 			discount: data.discountPercentage,
 			type: data.id % 2 === 0 ? 'marketplace' : 'own_store',
+			weight: Math.floor(Math.random() * (10000 - 500 + 1)) + 500,
 			marketplaces: [
 				{
 					id: 1,
