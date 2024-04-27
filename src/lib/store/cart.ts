@@ -18,7 +18,7 @@ export const addProductToCart = (product: CartData) => {
 	if (cartData.find((data) => data.id === product.id)) {
 		increaseProductQuantity(product.id);
 	} else {
-		const newCartData = [...cartData, { ...product, quantity: 1 }];
+		const newCartData = [...cartData, { ...product, quantity: product.min_order || 1 }];
 		cart.set(newCartData);
 		localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(newCartData));
 	}

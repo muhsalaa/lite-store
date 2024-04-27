@@ -27,7 +27,7 @@
 			increaseProductQuantity(item.id);
 			checkoutProduct([item]);
 		} else {
-			checkoutProduct([product]);
+			checkoutProduct([{ ...product, quantity: 1 }]);
 		}
 
 		goto('/checkout');
@@ -60,6 +60,26 @@
 		<p class="mb-3">
 			{data.product.description}
 		</p>
+	</section>
+
+	<section class="mt-3 bg-white px-4 py-3">
+		<h2 class="font-bold mb-2 text-lg">Detail Produk</h2>
+		<div class="flex items-center justify-between mb-1">
+			<p class="text-gray-400">Berat</p>
+			<p>{data.product.weight} gram</p>
+		</div>
+		<div class="flex items-center justify-between mb-1">
+			<p class="text-gray-400">Kondisi</p>
+			<p>{data.product.condition}</p>
+		</div>
+		<div class="flex items-center justify-between mb-1">
+			<p class="text-gray-400">Stok</p>
+			<p>{data.product.stock}</p>
+		</div>
+		<div class="flex items-center justify-between mb-1">
+			<p class="text-gray-400">Minimal pemesanan</p>
+			<p>{data.product.min_order}</p>
+		</div>
 	</section>
 
 	<section class="mt-3 bg-white px-4 py-3">

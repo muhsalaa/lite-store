@@ -163,7 +163,6 @@ Alamat: ${formData.get('address')}
 	</section>
 	<section class="mt-3 bg-white py-3 px-4">
 		<h2 class="font-bold mb-2 text-lg">Ringkasan belanja</h2>
-
 		<div class="flex items-center justify-between">
 			<p>Total</p>
 			<p class="font-bold">{formatCurrency(getTotal())}</p>

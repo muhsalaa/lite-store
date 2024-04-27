@@ -7,4 +7,18 @@ export type ProductProps = {
 	thumbnail: string;
 	stock: number;
 	weight: number;
+	location: string;
+	condition: string;
+	min_order: number;
 };
+
+export type StoreType =
+	| 'bukalapak'
+	| 'instagram'
+	| 'facebook'
+	| 'x'
+	| 'tokopedia'
+	| 'shopee'
+	| 'blibli'
+	| 'tiktok'
+	| 'lazada';

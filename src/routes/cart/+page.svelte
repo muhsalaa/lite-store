@@ -68,7 +68,7 @@
 								on:click={() => decreaseProduct(cart.id)}
 								outline
 							>
-								{#if cart.quantity && cart.quantity > 1}
+								{#if cart.quantity && cart.quantity > (cart.min_order || 1)}
 									<Icon src={Minus} />
 								{:else}
 									<Icon src={Trash} />

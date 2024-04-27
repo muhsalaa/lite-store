@@ -12,6 +12,9 @@ export async function load({ fetch, params }) {
 			discount: data.discountPercentage,
 			type: data.id % 2 === 0 ? 'marketplace' : 'own_store',
 			weight: Math.floor(Math.random() * (10000 - 500 + 1)) + 500,
+			location: 'Bogor',
+			condition: data.id % 2 === 0 ? 'Bekas' : 'Baru',
+			min_order: data.id % 2 === 0 ? 1 : 3,
 			marketplaces: [
 				{
 					id: 1,

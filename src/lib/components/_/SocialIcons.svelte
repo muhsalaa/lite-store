@@ -1,14 +1,7 @@
 <script lang="ts">
-	export let name:
-		| 'bukalapak'
-		| 'instagram'
-		| 'facebook'
-		| 'x'
-		| 'tokopedia'
-		| 'shopee'
-		| 'blibli'
-		| 'tiktok'
-		| 'lazada' = 'bukalapak';
+	import type { StoreType } from '$lib/types/product';
+
+	export let name: StoreType = 'bukalapak';
 	export let size: number = 20;
 </script>
 

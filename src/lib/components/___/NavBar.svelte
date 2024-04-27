@@ -3,6 +3,7 @@
 	import { Icon, Bars3, ArrowLeft } from 'svelte-hero-icons';
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
+	import { config } from '$lib/store/config';
 
 	import ButtonIcon from '$lib/components/_/ButtonIcon.svelte';
 	import Cart from '$lib/components/__/Cart.svelte';
@@ -50,7 +51,7 @@
 					alt="logo"
 					class="w-10 h-10"
 				/>
-				<p class="font-bold text-xl">BrainBoost Store</p>
+				<p class="font-bold text-xl">{$config.name} Store</p>
 			</a>
 		{:else}
 			<button on:click={back} class="flex items-center gap-2">

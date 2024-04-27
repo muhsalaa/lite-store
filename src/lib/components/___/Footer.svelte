@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { config } from '$lib/store/config';
 	import SocialIcons from '$lib/components/_/SocialIcons.svelte';
 </script>
 
@@ -11,16 +12,15 @@
 					alt="logo"
 					class="w-8 h-8 rounded-full"
 				/>
-				<p class="font-bold text-sm">BrainBoost Store</p>
+				<p class="font-bold text-sm">{$config.name} Store</p>
 			</a>
 			<p class="max-w-48 text-[10px] text-gray-700 mb-3">
-				One stop shopping untuk berbagai suplemen otak alami.
+				{$config.description}
 			</p>
 			<ul class="flex items-center gap-2">
-				<li><a href="/#"><SocialIcons name="tokopedia" size={20} /></a></li>
-				<li><a href="/#"><SocialIcons name="shopee" size={20} /></a></li>
-				<li><a href="/#"><SocialIcons name="blibli" size={20} /></a></li>
-				<li><a href="/#"><SocialIcons name="tiktok" size={20} /></a></li>
+				{#each $config.stores as store}
+					<li><a href={store.url}><SocialIcons name={store.type} size={20} /></a></li>
+				{/each}
 			</ul>
 		</div>
 		<div class="flex-nowrap whitespace-nowrap">
@@ -28,12 +28,14 @@
 				<li><a class="text-xs text-cyan-700 hover:underline" href="/#">Beranda</a></li>
 				<li><a class="text-xs text-cyan-700 hover:underline" href="/#">Tentang Kami</a></li>
 				<li><a class="text-xs text-cyan-700 hover:underline" href="/#">Testimoni</a></li>
-				<li><a class="text-xs text-cyan-700 hover:underline" href="/#">Source Code</a></li>
 			</ul>
 		</div>
 	</div>
 	<div class="w-full h-8 bg-cyan-100 flex items-center justify-between px-4">
-		<p class="text-xs text-cyan-900 font-bold">© 2022 BrainBoost Store</p>
+		<p class="text-xs text-cyan-900 font-bold">
+			© {new Date().getFullYear()}
+			{$config.name} Store
+		</p>
 		<a href="/#" class="text-xs text-cyan-700 hover:underline">Ketentuan Pelayanan</a>
 	</div>
 </footer>
