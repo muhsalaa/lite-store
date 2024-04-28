@@ -77,8 +77,7 @@ Total Harga: ${formatCurrency(getTotal())}
 Berikut adalah detail pengiriman:
 Nama: ${formData.get('full_name')}
 Phone: ${formData.get('phone_number')}
-Alamat: ${formData.get('address')}
-		`;
+Alamat: ${formData.get('address')}`;
 
 		deleteProductsFromCart($checkout.map((item) => item.id));
 		goto('/', { replaceState: true });

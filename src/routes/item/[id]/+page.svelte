@@ -12,6 +12,7 @@
 	import { showToast } from '$lib/store/toast.js';
 	import { goto } from '$app/navigation';
 	import { checkoutProduct } from '$lib/store/checkout.js';
+	import { config } from '$lib/store/config.js';
 
 	export let data;
 	const isOwnStore = data.product.type !== 'own_store';
@@ -31,6 +32,17 @@
 		}
 
 		goto('/checkout');
+	}
+
+	function chatStore(product: ProductProps) {
+		const message = `Halo kak, saya ingin bertanya mengenai produk ${product.title}
+
+${window.location.href}`;
+
+		window.open(
+			`https://wa.me/${$config.phone_number}?text=${encodeURIComponent(message)}`,
+			'_blank'
+		);
 	}
 </script>
 
@@ -110,7 +122,7 @@
 	{#if isOwnStore}
 		<section class="mt-3 sticky bottom-0 bg-white px-4 py-3 border-t">
 			<div class="flex gap-2 w-full">
-				<ButtonIcon class="h-10 w-10" outline>
+				<ButtonIcon class="h-10 w-10" outline on:click={() => chatStore(data.product)}>
 					<Icon src={ChatBubbleLeftEllipsis} />
 				</ButtonIcon>
 				<Button outline block on:click={() => checkout(data.product)}>Beli Sekarang</Button>

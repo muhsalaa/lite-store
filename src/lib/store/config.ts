@@ -14,11 +14,6 @@ type StoreConfig = {
 	}[];
 	about_us?: string;
 	terms_and_conditions?: string;
-	testimony?: {
-		stars: number;
-		text: string;
-		name: string;
-	}[];
 };
 
 export const config = writable<StoreConfig>({
